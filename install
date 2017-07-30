@@ -1,4 +1,6 @@
-#!/usr/bin/env python3
+#!/bin/bash
 
-if __name__ == '__main__':
-	print("mailservice installed successfully")
+echo "Installing dokku-mailservice"
+docker build -t mailservice .
+docker run -d --name mailservice --restart unless-stopped mailservice
+echo "Successfully installed dokku-mailservice"
