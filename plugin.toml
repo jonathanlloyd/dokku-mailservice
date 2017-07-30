@@ -1,3 +1,5 @@
 [plugin]
 description = "dokku mail server plugin"
 version = "0.1.0"
+[plugin.config]
+testing = "true"
