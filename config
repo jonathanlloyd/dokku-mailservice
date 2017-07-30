@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -eo pipefail; [[ $DOKKU_TRACE ]] && set -x
+
+export PLUGIN_SOURCE="$(dirname "${BASH_SOURCE[0]}")"
+export PLUGIN_ROOT=/var/lib/dokku/services/mailservice
+export SERVICE_NAME="mailservice"
+export PLUGIN_BASE_PATH="$PLUGIN_PATH"
+if [[ -n $DOKKU_API_VERSION ]]; then
+  export PLUGIN_BASE_PATH="$PLUGIN_ENABLED_PATH"
+fi
+
+source "$PLUGIN_BASE_PATH/common/functions"

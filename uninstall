@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -eo pipefail; [[ $DOKKU_TRACE ]] && set -x
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/config"
+
+dokku_log_info1 "Uninstalling dokku-mailservice..."
+rm -rf $PLUGIN_ROOT
+docker rm -f mailservice
+docker rmi mailservice
+dokku_log_info1 "Successfully uninstalled dokku-mailservice"

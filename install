@@ -1,6 +1,10 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -eo pipefail; [[ $DOKKU_TRACE ]] && set -x
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/config"
 
-echo "Installing dokku-mailservice"
-docker build -t mailservice .
+dokku_log_info1 "Installing dokku-mailservice..."
+mkdir -p $PLUGIN_ROOT
+dokku_log_info2 "Building mailservice container..."
+docker build -t mailservice $PLUGIN_SOURCE
 docker run -d --name mailservice --restart unless-stopped mailservice
-echo "Successfully installed dokku-mailservice"
+dokku_log_info1 "Successfully installed dokku-mailservice"
